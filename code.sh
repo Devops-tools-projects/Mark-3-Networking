@@ -6,6 +6,7 @@
 # script to list out the user who has access to repository, with this we will recreate this command "curl -s -u "USERNAME:PASSWORD" https://api.github.com/user/repos/{owner}/{repo}/collaborators and filter the output#
 ################################
 
+set -x
 #to get the git url
 
 API_URL="https://api.github.com"
@@ -25,10 +26,9 @@ repo=$2
 
 #we will make a function for git to make a github API request.
 
-github_api() {
-
-	local owner= $1
-	local url="${API_URL}/"
+function github_api {
+	local part= "$1"
+	local url="${API_URL}/${part}"
 
 
 
@@ -42,9 +42,9 @@ github_api() {
 
 #we will filter users with read access "https://api.github.com/repos/{owner}/{repo}/collaborators"
 
-github_list="repos/${owner}/${repo}/collaborators"
-
-collab="$(github_api $github_list)"
+function github_list {
+	 local end="repos/${owner}/${repo}/collaborators"
+	collab="$(github_api "$end")"
 
 #| jq -r '.[] | select(.permissions.pull == true) | .login')" 
        
@@ -53,4 +53,6 @@ collab="$(github_api $github_list)"
  #   echo "$login"
 #done
 echo "$collab"
+}
 
+github_list
