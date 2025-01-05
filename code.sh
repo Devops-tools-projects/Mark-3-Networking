@@ -27,7 +27,7 @@ repo=$2
 #we will make a function for git to make a github API request.
 
 function github_api {
-	local part= "$1"
+	local part="$1"
 	local url="${API_URL}/${part}"
 
 
@@ -43,7 +43,7 @@ function github_api {
 #we will filter users with read access "https://api.github.com/repos/{owner}/{repo}/collaborators"
 
 function github_list {
-	 local end="repos/${owner}/${repo}/collaborators"
+	local end="repos/${owner}/${repo}/collaborators"
 	collab="$(github_api "$end")"
 
 #| jq -r '.[] | select(.permissions.pull == true) | .login')" 
@@ -54,5 +54,5 @@ function github_list {
 #done
 echo "$collab"
 }
-
 github_list
+
