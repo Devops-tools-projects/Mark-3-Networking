@@ -71,3 +71,16 @@ When multiple devices are connected to the same network medium, they must coordi
   2) Jam signal : when a collision is detected, the device immediately sends a Jam signal (a short burst of data) to notify all devices that a collision occured.
 
   3) Backoff Algorithm: After sending the jam signal, Each device waits for a random amount of time before retrying, this waiting time is decided by the binary exponential backoff algorithm.
+
+### Switch:
+It is a layer 2 device unlike hub, switches understand frames and MAC address. They Maintain a MAC address table. which starts off empty. As the swith receives frames on its ports, it learns which devices are connected & Populates the MAC address table. it fills the MAC address table by looking at source MAC of the packets and the port.
+
+Switches are intelligent, they STORE and FORWARD. they dont repeat blindly like hubs. it means that only valid frames are forwarded - collisions are isolated on the port they occured. Every X port switch has X collision domain. it allows switches to scale and be connected together.
+
+### Data Link layer supports
+
+ - Identifiable devices
+ - Media access Control (sharing)
+ - Collision Detection
+ - Unicast - 1:1
+ - Broad cast 1:ALL
