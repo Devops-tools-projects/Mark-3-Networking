@@ -41,6 +41,33 @@ it introduces the concept of frames. it is a format for sending info over the la
 MAC can be formed of OUI(Organizationaly Unique Identifier) and NIC (Network Interface Controler). so Together, A MAC address is globaly Unique. Frames that are used in layer-2 has few different components.
 
   1) **Preamble(56 bits [ SFD-8 bits])** : it has start frame delimiter, it is used to let the devices know that it is the start of a frame.
+     
   2) **Destination/Source MAC address** : All the devices in Layer-2 has a unique MAC address and we can send frame to a specific device, by mentioning its MAC address in destination (or) ALL(F's) to send it on all devices.
+  
   3) **ET(16 Bits)** : This is commonly used to specify, which layer3 protocol is placing. its data inside the frame.
+  
   4) **Payload (46-1500 Bytes)** : The "Payload" is the data that frame carries from source to destination. its generally provided by "Layer 3" and "Ether Type(ET)" attribute defines which L3 Protocol is used.
+
+  5) **FCs(32 bits)(Frame check sequence)** : It is used to identify any errors in the frame. it is a simple check to see if the frame is correpted (or) not
+
+            _________________________________________________________________________________________________________    
+            | Preamble  | Destination| Source  | ET   |    Pay Load   46-1500 Bytes                   |  FCS        |
+            | 56 bits   |   MAC      |   MAC   |  16  |                                               | 32 Bits     |
+            | SFD-8 Bits|  Address   | Address | Bits |                                               |             |  
+             ________________________________________________________________________________________________________
+
+### CSMA/CD (Carrier Sense Multiple Access / Collision Detection)
+When multiple devices are connected to the same network medium, they must coordinate who gets to send data to avoid collisions. if no carrier, Layer 1 takes the frame data, converts to physical standard and transmits. Layers are independent conceptually speaking L2 is talking to devices in L2. even if it is using Layer 1. so Layer 1 is abstracted with Layer 2.
+
+**Encapsulation** : The Process of taking raw data & rapping it in something else.
+**Carrier Detection** : This will check if a carrier is detected, if yes then it waits for another device to transmitt.
+
+**CD(Collision Detection)**: It is a mechanism used in CSMA/CD, mainly in wired ethernet, to detect when two devices transmit data at the same time on the same network channel. 
+
+  1) CD : While sending, the device listens to the signal 
+
+                signal it sends != signal it reads --> collision detected
+
+  2) Jam signal : when a collision is detected, the device immediately sends a Jam signal (a short burst of data) to notify all devices that a collision occured.
+
+  3) Backoff Algorithm: After sending the jam signal, Each device waits for a random amount of time before retrying, this waiting time is decided by the binary exponential backoff algorithm.
