@@ -33,7 +33,7 @@ There are two types IPS in use.
 
 ## IP Addressing (IPV4):
 Lets take an example IP address. This Format of an IP is called Dotted-decimal Notatoin(4 x 0-255). These are 4 decimal Numbers from 0-255 divided by "."
-IP are mostly divided into two parts.
+IP are mostly divided into two parts. IP address needs to be unique in both the local and global setup to avoid any issues.
 
             133.33.3.7
 
@@ -42,3 +42,9 @@ IP are mostly divided into two parts.
             10000101.00100001.00000011.00000111  ---> 32 bits(4 bytes)/ 4 x 8 bits (Octects)
 
 If the "Network Part" of two IP address match, it means they're on the same IP network. if not, they're on different networks. IP address are binary, 4 sets of 8 bits(octets) for a total of 32 bits.
+
+This network has a 116 prefix. 16 bits of ip are the network, and the remaining bits are are for hosts. IP address are assigned by machine (DHCP) (or) humans.
+
+  1) **static IP** : IPs which are staticaly assigened by humans.
+  2) **DHCP (Dynamic host Configuration protocol)** : This is used to assigned IP automatically by the machine
+
