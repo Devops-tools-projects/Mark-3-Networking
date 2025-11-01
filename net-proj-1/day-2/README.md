@@ -76,3 +76,8 @@ Router compares packet destination IP & route table for Matching destinations. T
 - Routing is the process of packets, hop by hop across the internet from source to destination. Router has multiple interfaces route table is used for selection.
 - Route tables are statically populated are they are protocols like BGP (Boarder Gateway Protocol), which runs the internet.
 
+## Address Resolution Protocol (ARP) :
+
+They are used to generally in layer 3 protocol. it maps ip address (Layer 3) to MAC address (Layer 2) on a local area network (LAN). This Protocol runs in between the layer 2 and layer 3. it broad cast to ALL F's(all connected devices) to find the destination IP. the ARP protocol at the destination sends the acknowledgement with its MAC address.
+
+Now the source encapsulates the Packet with destination MAC address and creates a frame. then it will be transported through the L1.
