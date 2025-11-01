@@ -48,3 +48,31 @@ This network has a 116 prefix. 16 bits of ip are the network, and the remaining 
   1) **static IP** : IPs which are staticaly assigened by humans.
   2) **DHCP (Dynamic host Configuration protocol)** : This is used to assigned IP automatically by the machine
 
+## Subnet Mask:
+It divides a larger network into smaller, more manageable parts each subnet functions as its own smaller within the larger one. subnet mask allows a host to determine if an IP address it needs to communicate with is local (or) remote - which influences if it needs to use a gateway (or) can communicate locally.
+
+A subnet mast is configured on a host device in addition to an IP address. the starting address of the local network, is ALL-0's in the HOST part, the ending is ALL-1's in the HOST Part.
+
+    EX: 255.255.0.0 ---> this is the same as /16 Prefix
+
+        133.33.3.7 ---> has a subnet mask for /16 are
+
+    net start -->  10000101.00100001.00000000.00000000 ---> 133.33.0.0
+    net end   -->  10000101.00100001.11111111.11111111 ---> 133.33.255.255
+
+## Route Tables & Routes :
+Router compares packet destination IP & route table for Matching destinations. The More specific Prefixes are preferred (0 lowest, 32 highest). Packet is forwarded on to the next HOP/Target.
+
+ Example of a route table is
+
+        ----------------------------------
+        |Destination   |  Next Hop/Target|
+        ----------------------------------
+        | 52.217.13.0/24 | 52.217.13.1    |
+        |  0.0.0.0/0     |  52.43.214.1   |
+        |  52.43.215.0/24|  52.43.215.1   |
+        -----------------------------------
+
+- Routing is the process of packets, hop by hop across the internet from source to destination. Router has multiple interfaces route table is used for selection.
+- Route tables are statically populated are they are protocols like BGP (Boarder Gateway Protocol), which runs the internet.
+
