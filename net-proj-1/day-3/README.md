@@ -27,3 +27,37 @@ Layer-4 adds on top of layer 3. it provides two Protocols. both stand on top of 
 A TCP segment (Transmission Control Protocol segment) is the basic data unit exchanged in a TCP connection. Each segment consists of two main parts: a TCP header and a data (payload) section.
 
 - A TCP segments are encapsulated within ip packets. Segments dont have SRC and DST IPs. the Packets Provide device addressing, it has Source Port & Destination Port.
+
+      +---------------------------------------------------------------+
+      | Source Port (16) | Destination Port (16)                      |
+      +---------------------------------------------------------------+
+      | Sequence Number (32)                                          |
+      +---------------------------------------------------------------+
+      | Acknowledgment Number (32)                                    |
+      +---------------------------------------------------------------+
+      | Data Offset | Reserved | Flags | Window Size (16)             |
+      +---------------------------------------------------------------+
+      | Checksum (16) | Urgent Pointer (16)                           |
+      +---------------------------------------------------------------+
+      | Options (variable) | Padding (variable)                       |
+      +---------------------------------------------------------------+
+      |                    Data (Payload)                             |
+      +---------------------------------------------------------------+
+
+  - **Source Port**: Port number of the sending application.
+  - **Destination Port** : Port number of the receiving application.
+  - **Sequence Number** : Identifies the position of the first data byte in this segment within the stream.
+  - **Acknowledgment Number** : Specifies the next expected byte from the other side. it is a way that one side can indicate that it received sertian sequence number.
+  - **Data Offset**: Indicates where the data begins; tells how long the header is.
+  - **Reserved** : Reserved for future use (set to 0).
+  - **Flags** : Control messages for managing connections and flow. Flage are set to alter the connection.
+  - **Window** : It defines the No.of bites that we indicate that we are willing to receive between acknowledgment.
+  - **Checksum** : This is used for error checking. TCP can check errors and arriange retransmittion.
+  - **Urgent Pointer** : indicates the end of urgent data.
+ 
+## TCP :
+TCP is a connection based protocol. A connection is established between two devices using a random port on a client and a known port on the server.Once established the connection is bi-directional. the "connection" is a reliable connection,Provided via the segments encapsulated in IP packets.
+
+- Well known port of a TCP connects are 443. this is the port the server is running the TCP on.
+- Ephemeral Port of a TCP. As part of TCP Connection from client the client uses a Temp port like 23060, This has higher Port range and Temporary.
+- TCP is all about connection, we cannot send data without creating a connection, both the client and server needs to acknowledgment on started connection.
