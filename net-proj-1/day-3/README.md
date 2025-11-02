@@ -31,15 +31,15 @@ A TCP segment (Transmission Control Protocol segment) is the basic data unit exc
       +---------------------------------------------------------------+
       | Source Port (16) | Destination Port (16)                      |
       +---------------------------------------------------------------+
-      | Sequence Number (32)                                          |
+      |           Sequence Number (32)                                |
       +---------------------------------------------------------------+
-      | Acknowledgment Number (32)                                    |
+      |           Acknowledgment Number (32)                          |
       +---------------------------------------------------------------+
-      | Data Offset | Reserved | Flags | Window Size (16)             |
+      |     Data Offset | Reserved | Flags | Window Size (16)         |
       +---------------------------------------------------------------+
-      | Checksum (16) | Urgent Pointer (16)                           |
+      |       Checksum (16) | Urgent Pointer (16)                     |
       +---------------------------------------------------------------+
-      | Options (variable) | Padding (variable)                       |
+      |       Options (variable) | Padding (variable)                 |
       +---------------------------------------------------------------+
       |                    Data (Payload)                             |
       +---------------------------------------------------------------+
@@ -61,3 +61,22 @@ TCP is a connection based protocol. A connection is established between two devi
 - Well known port of a TCP connects are 443. this is the port the server is running the TCP on.
 - Ephemeral Port of a TCP. As part of TCP Connection from client the client uses a Temp port like 23060, This has higher Port range and Temporary.
 - TCP is all about connection, we cannot send data without creating a connection, both the client and server needs to acknowledgment on started connection.
+
+### Working of TCP (TCP Connection 3-way handshake) 
+A Connection needs to be established for Data transfer to take place using the TCP, It uses 3 way handshake to establish the connection.
+
+          |__Client__|                                |__Server__|
+                |                                           |
+                |                                           |
+    |__SYN__|   |---------------Sequence = CS-------------->|
+                |                                           |
+                |<-----Sequence=SS/Acknowledge=CS+1---------|    |__SYN-ACK__|
+                |                                           |
+    |__ACK__|   |-----Sequence=CS+1/Acknowledge=SS+1------->|
+                |                                           |
+                |<-Connection established client send data->|
+
+1) A client send a segment with SYN sequence set set as CS (ISN) Initial sequence number. This is called syncronise sequence number.
+2) Now server Pick random ISN sequence as "ss" sends segment SYN-ACK and Acknowledge set to 'CS+1'. This means the server have received up to cs and asking for next sequence . this is called syncronise sequence number & Acknowledge the clinet segment.
+3) Client send segment with ACK(Acknowledge) set to SS+1, where clients ask server that it received ss and now send ss+1, sequence set to cs+1.
+4) Now data can be flown between the connection established between the client and server. so now one side keeps incrementing teh sequence & other side keeps acknowledge the sequence +1.
