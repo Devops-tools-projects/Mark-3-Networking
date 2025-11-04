@@ -44,4 +44,17 @@ A Firewall configuration can be divided into two types as per the TCP setup.
 ### Port address translation (PAT):
 - In AWS this is how the NAT Gateway (NAT GW) funtions - a(many:1) (Private IP:Public IP) Architecture.
 - it is when a large number of Private devices share a single public address.
-- The NAT Device (Router) Records the source (Private) IP
+- The NAT Device (Router) Records the source (Private) IP and Source Port. it replaces the source IP with the Single Public IP and a Public Soure Port Allocated from a pool which allows IP Overloading (Many to one).
+- While sending a Packet, The Source Side Dynamicaly Create a Port like 32768. But the NAT device Stores this Port from client and assignes a Public source Port.
+- The Return traffic from the destination side has tcp/443 & 1.3.3.7 as the Source and the Public IP of the NAT device and destination Port.
+- Now the NAT device, will translate the public Port & IP to private Port and IP using the NAT Table.
+
+  			NAT Table
+  		+------------+--------------+------------+-------------+
+  		| Private IP | Private Port |  Public IP | Public Port |
+  		+------------+--------------+------------+-------------+
+  		| 10.0.0.42	 |  	32768   | 52.95.36.67|     1337    |
+  		+-------------------------------------------------------
+  		| 10.0.0.43  | 		32769   | 52.95.36.67|    1338     |
+  		--------------------------------------------------------
+  	
