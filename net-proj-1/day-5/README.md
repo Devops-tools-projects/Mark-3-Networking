@@ -25,5 +25,23 @@ It is a type of encrption where the same secure key is used for both encryption 
 ## Asymmetric Encryption:
 It is a cryptographic system that uses two different keys for secure communication. it solves the big problem of symmetric encryption which is how to share the key securely. it is slow , but we can easily exchange Public keys.
 
+## Setting up the IPSEC VPN:
+IPSEC has two main Phases
+1) **IKE (Internet key Exchange) Phase 1 (Slow & Heavy)**: Authenticate Pre shared Key (Password)/Certificate. using Asymmetric encryption to agree on, and Create a shared symmetric key. IKESA Created (Phase 1 tunnel).
 
+2) **IKE (Internet key Exchange) Phase 2 (fast & Agile)**: This uses the keys agreed in Phase 1. Agree encryption method, and keys used for bulk data transfer. create IPSEC SA Phase 2 tunnel (architecturally running over Phase 1).
 
+## Working of IPSEC VPN:
+### Phase - 1
+- First, we communicate for both sides, the routers from both sides needs to be part of same VPN, by Certificate (or) Pre-shared Key authentication.
+- Now, we can move on to diffie - hellman key exchange. each side create a DH private Key. this is used to decriptdata.
+- each side uses the Private Key and generates a Public Key this public key is used to encrypt data that only that private Key can decode.
+- Public keys are exchanged over the public internet. each side takes their Private key, and the remote peers public key-independently generates the "same" shared Diffie-hellmen key.
+- Now using the DH Key - exchanges key material and agreements. each side generates a "symmetrical" key - using DH key and exchaged material.
+- The symmetrical key is used to pass data using the IKE security Associations (Phase 1 Tunnel).
+  
+### Phase -2
+- Symmetrical key is used to encrypt and decrypt agreements and pass more key material. The Other side provides "Best" "Shared" Encryption and integrity methods communicated and agreed.
+- The DH Key and exchanged key material is used to create symmetrical IPSEC key. this key is designed for large scale data transfer. This algorithm is efficient and secure.
+- IPSEC key is used for bulk encryption and decryption of interesting traffic using the IPSEC SA (PHASE 2 TUNNEL).
+- These are the security associations that is used to transfer the data between networks at either side of VPN.
