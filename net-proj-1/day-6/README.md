@@ -40,3 +40,8 @@ The Maximum ethernet V2 frame size is 1500 bytes. but any frame which exceeds th
 - Traffic Over a direct connect support jumbo.
 - Transit gateway can support packets which are larger than usual but they support only up to 8500.
 
+# Application Firewall (Layer 7) 
+- Layer 7 firewall are aware of the Layer 7 protocols like http protocol.
+- Layer 7 firewall can identify normal (or) abnormal requests protocol specific attacks, data at L7 can be inspected and blocked, replaced (or) tagged(like adult,spam,off topic etc)
+- we will be able to identify, block & adjust specific applications ex: facebook.
+- L7 firewall keeps all L3,L4 & L5 features but can react to L7 elements (DNS,RATE,Content,headers etc)
